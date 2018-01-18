@@ -1,7 +1,5 @@
-console.log("background page ready");  
-
-chrome.browserAction.onClicked.addListener(function(tab) {  
-    console.log(tab);  
-    alert("使用者在"+tab.title+ "中點擊了瀏覽器按鈕");  
-
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    console.log(message);
+    console.log(sender);
+    sendResponse({content: "來自事件腳本的回覆"});
 });
