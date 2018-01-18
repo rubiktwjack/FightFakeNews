@@ -1,49 +1,25 @@
-<!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
-<html>
-  <head>
-    <title>Getting Started Extension's Popup</title>
-    <style type="text/css">
-      body {
-        margin: 10px;
-        white-space: nowrap;
-      }
+<!DOCTYPE html>  
+<html>  
 
-      h1 {
-        font-size: 15px;
-      }
+<head>  
+    <meta charset="utf-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+    <title></title>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flat-ui/2.3.0/css/flat-ui.css">  
+    <link rel="stylesheet" type="text/css" href="extension.css">  
+</head>  
 
-      #container {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
-      }
-    </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-    -->
-    <script src="popup.js"></script>
-  </head>
-
-  <body>
-    <h1>Background Color Changer</h1>
-    <div id="container">
-      <span>Choose a color</span>
-      <select id="dropdown">
-        <option selected disabled hidden value=''></option>
-        <option value="white">White</option>
-        <option value="pink">Pink</option>
-        <option value="green">Green</option>
-        <option value="yellow">Yellow</option>
-      </select>
-    </div>
-  </body>
+<body>  
+    <div class="row demo-tiles">  
+        <div class="col-xs-3">  
+            <div class="tile">  
+                <img src="https://goo.gl/5Qxsjb" alt="Compas" class="tile-image big-illustration">  
+                <h3 class="tile-title">麒展的Facebook</h3>  
+                <p></p> 
+                <a id="button" class="btn btn-primary"><span class="fui-home"></span>my Facebook</a>
+              
+          
+      
+    <script type="text/javascript" src="popup.js"></script>  
+</body>  
 </html>
