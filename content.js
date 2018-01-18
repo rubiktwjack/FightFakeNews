@@ -1,6 +1,6 @@
 console.log("內容腳本注入");
 
-//var toggleBg = true;
+var toggleBg = true;
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     console.log(message);
