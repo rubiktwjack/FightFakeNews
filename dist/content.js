@@ -1,1 +1,0 @@
-console.error("\n/home/chan/FightFakeNews/src/content.js:1\nimport Vue from 'vue';\n^\nParseError: 'import' and 'export' may appear only with 'sourceType: module'");
