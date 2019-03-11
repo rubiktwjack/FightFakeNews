@@ -28,10 +28,10 @@ $(".mbm").each(function() {
 
   if (ele) {
     $(this)
-      .find("._3x-2")
+      .find("._3vuz")
       /*.find(".mtm")*/
       .append(
-        '<button id="true-button"  style="margin-top:5px; margin-left:5px; width:48%;  display: inline-block;padding: 15px 25px;font-size: 24px;cursor: pointer;text-align: center;text-decoration: none;outline: none;color: #fff;background-color: #4CAF50;border: none;" disabled="true" class="true-button" onclick="buttonFunction(\'' +
+        '<button id="true-button"  style="margin-top:5px; margin-left:5px; width:28%;  display: inline-block;padding: 5px 15px;font-size: 12px;cursor: pointer;text-align: center;text-decoration: none;outline: none;color: #fff;background-color: #4CAF50;border: none;" disabled="true" class="true-button" onclick="buttonFunction(\'' +
           ele +
           "','" +
           voter +
@@ -40,10 +40,10 @@ $(".mbm").each(function() {
           '\')" ><span class="">此新聞可信</button>'
       );
     $(this)
-      .find("._3x-2")
+      .find("._3vuz")
       /*.find(".mtm")*/
       .append(
-        '<button id="false-button"  style="margin-top:5px; margin-left:5px;  width:48%;  display: inline-block;padding: 15px 25px;font-size: 24px;cursor: pointer;text-align: center;text-decoration: none;outline: none;color: #fff;background-color: #4CAF50;border: none;" disabled="true" class="false-button" onclick="buttonFunction(\'' +
+        '<button id="false-button"  style="margin-top:5px; margin-left:5px;  width:28%;  display: inline-block;padding: 5px 15px;font-size: 12px;cursor: pointer;text-align: center;text-decoration: none;outline: none;color: #fff;background-color: #4CAF50;border: none;" disabled="true" class="false-button" onclick="buttonFunction(\'' +
           ele +
           "','" +
           voter +
@@ -58,6 +58,7 @@ $("body").on("DOMNodeInserted", function(e) {
   var target = e.target; //inserted element;
 
   if ($(e.target).hasClass("mbm")) {
+    // console.log("mbm");
     var voter = $("._cy6")
       .find("._1k67")
       .find("a")
@@ -70,8 +71,9 @@ $("body").on("DOMNodeInserted", function(e) {
       .find("a")
       .attr("href");
     if (ele) {
+      console.log("3v");
       $(target)
-        .find("._3x-2")
+        .find("._3vuz")
         /*.find(".mtm")*/
         .append(
           '<button id="true-button"  style="margin-top:5px;  margin-left:5px; width:48%;  display: inline-block;padding: 15px 25px;font-size: 24px;cursor: pointer;text-align: center;text-decoration: none;outline: none;color: #fff;background-color: #4CAF50;border: none;"  class="true-button" onclick="buttonFunction(\'' +
@@ -83,7 +85,7 @@ $("body").on("DOMNodeInserted", function(e) {
             "')\" >此新聞可信</button>"
         );
       $(target)
-        .find("._3x-2")
+        .find("._3vuz")
         /*.find(".mtm")*/
         .append(
           '<button id="false-button"  style="margin-top:5px;  margin-left:5px; width:48%;  display: inline-block;padding: 15px 25px;font-size: 24px;cursor: pointer;text-align: center;text-decoration: none;outline: none;color: #fff;background-color: #4CAF50;border: none;"  class="false-button" onclick="buttonFunction(\'' +
