@@ -1,106 +1,107 @@
-var port = "";
-var abi = [
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "FFN",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "newsurl",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "username",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "vote",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "time",
-        "type": "string"
-      }
-    ],
-    "name": "voteEvent",
-    "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "newsurl",
-        "type": "string"
-      },
-      {
-        "name": "username",
-        "type": "string"
-      },
-      {
-        "name": "vote",
-        "type": "string"
-      },
-      {
-        "name": "time",
-        "type": "string"
-      }
-    ],
-    "name": "voteInfo",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "newsurl",
-        "type": "string"
-      }
-    ],
-    "name": "getVoteInfo",
-    "outputs": [
-      {
-        "name": "username",
-        "type": "string"
-      },
-      {
-        "name": "vote",
-        "type": "string"
-      },
-      {
-        "name": "time",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  }
-];
-var contract_address = "0xA048BB22fb5aC417DFa77DF144CDadd299734ba7";
-var userAccount;
-
-function extensionConnect(extensionId) {
-  port = chrome.runtime.connect(extensionId);
+var abi = [{
+  "constant": true,
+  "inputs": [],
+  "name": "FFN",
+  "outputs": [
+    {
+      "name": "",
+      "type": "address"
+    }
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+},
+{
+  "anonymous": false,
+  "inputs": [
+    {
+      "indexed": true,
+      "name": "newsurl",
+      "type": "string"
+    },
+    {
+      "indexed": true,
+      "name": "username",
+      "type": "string"
+    },
+    {
+      "indexed": true,
+      "name": "vote",
+      "type": "string"
+    },
+    {
+      "indexed": false,
+      "name": "time",
+      "type": "string"
+    }
+  ],
+  "name": "voteEvent",
+  "type": "event"
+},
+{
+  "constant": false,
+  "inputs": [
+    {
+      "name": "newsurl",
+      "type": "string"
+    },
+    {
+      "name": "username",
+      "type": "string"
+    },
+    {
+      "name": "vote",
+      "type": "string"
+    },
+    {
+      "name": "time",
+      "type": "string"
+    },
+    {
+      "name": "pk",
+      "type": "string"
+    }
+  ],
+  "name": "voteInfo",
+  "outputs": [],
+  "payable": false,
+  "stateMutability": "nonpayable",
+  "type": "function"
+},
+{
+  "constant": true,
+  "inputs": [
+    {
+      "name": "newsurl",
+      "type": "string"
+    }
+  ],
+  "name": "getVoteInfo",
+  "outputs": [
+    {
+      "name": "username",
+      "type": "string"
+    },
+    {
+      "name": "vote",
+      "type": "string"
+    },
+    {
+      "name": "time",
+      "type": "string"
+    }
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
 }
+];
+var contract_address = "0x64BBFEc1DD7d3A7900bD49053D89A8800a86f606";
+var userAccount;
+// load smartcontract
+let voteContract = web3.eth.contract(abi);
+let voteContractInstance = voteContract.at(contract_address);
 
 async function buttonFunction(e, voter, status) {
   // get date
@@ -115,6 +116,7 @@ async function buttonFunction(e, voter, status) {
       if (typeof web3 !== 'undefined') {
         console.log('Web3 Detected! ' + web3.currentProvider.constructor.name)
         window.web3 = new Web3(web3.currentProvider);
+        console.log(web3.version.api);
       } else {
         console.log('No Web3 Detected using HTTP Provider')
       }
@@ -125,14 +127,23 @@ async function buttonFunction(e, voter, status) {
         userAccount = accounts[0];
       })
 
-      // load smartcontract
-      let voteContract = web3.eth.contract(abi);
-      let voteContractInstance = voteContract.at(contract_address);
-
       // call vote
-      await voteContractInstance.voteInfo(e, voter, status, myDate, { gasPrice: 0 }, function (err, result) { console.log(result) })
+      var pk = voter + e;
+      await voteContractInstance.voteInfo(e, voter, status, myDate, pk, { gasPrice: 0 }, function (err, result) { console.log(result) })
       // get vote
       // await voteContractInstance.getVoteInfo.call(e, function (err, result) { console.log(result) })
+      // get event
+      // voteContractInstance.voteEvent({ newsurl: e, username: voter }, { fromBlock: 0, toBlock: 'latest' }).get((error, eventResult) => {
+      //   if (error)
+      //     console.log('Error in myEvent event handler: ' + error);
+      //   else
+      //     console.log('myEvent: ' + eventResult);
+      // });
+      voteContractInstance.allEvents({}, { fromBlock: 0, toBlock: 'latest' }, function (error, log) {
+        if (!error) console.log(log);
+      });
+
+
     } catch (error) {
       // User denied account access
       console.log(error);
@@ -152,13 +163,6 @@ async function buttonFunction(e, voter, status) {
   console.log(voter);
   console.log(status);
   console.log(myDate);
-
-  var info = {
-    username: voter,
-    link: e,
-    credibility: status,
-    date: myDate
-  };
-  port.postMessage(info);
 }
 // FB那邊的
+// events = voteContractInstance.allEvents({}, { fromBlock: 0, toBlock: 'latest' }, function (error, log) {  if (!error)    console.log(log);});

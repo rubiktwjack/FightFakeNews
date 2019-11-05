@@ -9,11 +9,9 @@ script.onload = function () {
 script.type = "text/javascript";
 script.src = chrome.extension.getURL("myscript.js");
 document.getElementsByTagName("head")[0].appendChild(script);
-chrome.runtime.sendMessage({
-  todo: "showPageAction"
-});
 
-var whiteList = ["/setnews", "/nba", "/ETtoday", "/nk7snake", "/m.ltn.tw", "/appledaily", "/kocpctw", "/watchout", "/TheNewsLens"]
+
+var whiteList = ["/ETtoday", "/YahooTWNews", "/appledaily.tw", "/djy.news", "/myudn", "/CTfans", "/m.ltn.tw", "/bbcnewstrad", "/TheNewsLens", "/edn168", "/pnnpts", "/nownews"]
 
 // first post
 $(".mbm").each(function () {
