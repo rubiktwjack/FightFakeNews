@@ -11,7 +11,7 @@ script.src = chrome.extension.getURL("myscript.js");
 document.getElementsByTagName("head")[0].appendChild(script);
 
 
-var whiteList = ["/ETtoday", "/YahooTWNews", "/appledaily.tw", "/djy.news", "/myudn", "/CTfans", "/m.ltn.tw", "/bbcnewstrad", "/TheNewsLens", "/edn168", "/pnnpts", "/nownews"]
+var whiteList = ["/YahooTWNews", "/ETtoday", "/tvbsfb", "/news.ebc", "/appledaily.tw", "/CTfans", "/setnews", "/myudn", "/stormmedia", "/m.ltn.tw"]
 
 // first post
 $(".mbm").each(function () {

@@ -139,10 +139,12 @@ async function buttonFunction(e, voter, status) {
       //   else
       //     console.log('myEvent: ' + eventResult);
       // });
-      voteContractInstance.allEvents({}, { fromBlock: 0, toBlock: 'latest' }, function (error, log) {
-        if (!error) console.log(log);
-      });
-
+      let events = voteContractInstance.allEvents({ fromBlock: 0, toBlock: 'latest' });
+      await events.get(function (error, logs) {
+        if (!error) {
+          console.log("events : " + logs)
+        }
+      })
 
     } catch (error) {
       // User denied account access
